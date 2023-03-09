@@ -1,6 +1,7 @@
-#include "include/priorityQueue.h"
+#include "include/test.h"
 
 int main () {
-    PriorityQueue queue(10);
+    Test tests;
+    tests.runTests();
     return 0;
 }

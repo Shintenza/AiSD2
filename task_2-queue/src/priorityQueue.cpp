@@ -50,16 +50,18 @@ void PriorityQueue::heapifyDown(int i) {
     int maxIndex = i;
 
     int left = getLeftChild(i);
-    if (left < last && tab[left] > tab[maxIndex])
+    if (left < last && tab[left] > tab[maxIndex]) {
         maxIndex = left;
+    }
 
     int right = getRightChild(i);
-    if (right < last && tab[right] > tab[maxIndex])
+    if (right < last && tab[right] > tab[maxIndex]) {
         maxIndex = right;
+    }
 
-    if (maxIndex != i) {
-        std::swap(tab[maxIndex], tab[i]);
-        heapifyDown(i);
+    if (i != maxIndex) {
+        std::swap(tab[i], tab[maxIndex]);
+        heapifyDown(maxIndex);
     }
 }
 
@@ -73,9 +75,10 @@ int PriorityQueue::pop() {
     if (last - 1 < 0)
         throw std::invalid_argument("the queue is already empty");
     int rootElement = tab[0];
+
     tab[0] = tab[last - 1];
     tab[last - 1] = 0;
-    --last;
+    last--;
     heapifyDown(0);
     return rootElement;
 }

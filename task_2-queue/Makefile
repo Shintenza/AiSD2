@@ -9,7 +9,7 @@ INC_DIR = $(SRC_DIR)/include
 
 OUT = main
 BINARIES = $(addprefix $(BIN_DIR)/, $(OUT))
-DEPS = priorityQueue
+DEPS = priorityQueue test
 DEPS_OBJ = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(DEPS)))
 DEPS_INC = $(addprefix $(INC_DIR)/, $(addsuffix .h, $(DEPS)))
 TEMPLATES =
