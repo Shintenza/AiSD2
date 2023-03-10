@@ -17,9 +17,30 @@ void Test::testPop() {
     assert(testingQueue.pop() == 10 && testingQueue.size() == 3 && testingQueue.equals_raw({6, 4, 1}));
 }
 
+void Test::testGetRootElem() {
+    PriorityQueue test(10);
+    test.insert(7);
+    test.insert(1);
+    test.insert(13);
+    test.insert(2);
+    assert(test.getRootElem() == 13);
+    test.pop();
+    assert(test.getRootElem() == 7);
+    test.pop();
+    assert(test.getRootElem() == 2);
+}
+
+void Test::testClear() {
+    PriorityQueue test(testingQueue);
+    test.clear();
+    assert(test.size() == 0 && test.equals_raw({}));
+}
+
 void Test::runTests() {
     std::cout<<"Uruchamianie testów..."<<std::endl;
     testInsert();
     testPop();
+    testGetRootElem();
+    testClear();
     std::cout<<"Testy zakończone pomyślnie"<<std::endl;
 }
