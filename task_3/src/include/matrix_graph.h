@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-// implementacja grafu skierowanego na podstawie macierzy
+// graf nieskierowany 
 
 class MatrixGraph {
     int **matrix;
@@ -18,8 +18,7 @@ public:
     void addEdge(int first_vindex, int second_vindex, int weight = 1);
     bool removeEdge(int first_vindex, int second_vindex);
     bool checkEdge(int first_vindex, int second_vindex);
-    int vertexInDegree(int idx);
-    int vertexOutDegree(int idx);
+    int vertexDegree(int idx);
     std::vector<int> getNeighbourIndices(int idx);
     void printNeighbourIndices(int idx);
     int getNumberOfEdges();
