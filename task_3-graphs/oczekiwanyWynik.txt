@@ -1,0 +1,17 @@
+sasiedzie 0:
+1 7
+lub 
+1 7 6
+
+siasiedzi 7
+1 4 
+lub
+1 4 3 0 5
+sasiedzi 9
+brak
+
+stopien 0   2 lub 3
+stopien 7  2 lub 5
+stopien 9  0
+
+liczba krawedzi  14

@@ -1,7 +1,7 @@
 CC = g++
-CFLAGS = -Wall -std=c++11 -g
+CFLAGS = -Wall -g
 
-NAME = task_2-queue
+NAME = task_6
 OBJ_DIR = obj
 SRC_DIR = src
 BIN_DIR = bin
@@ -9,7 +9,7 @@ INC_DIR = $(SRC_DIR)/include
 
 OUT = main
 BINARIES = $(addprefix $(BIN_DIR)/, $(OUT))
-DEPS = matrix_graph list_graph
+DEPS = list_graph load_input
 DEPS_OBJ = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(DEPS)))
 DEPS_INC = $(addprefix $(INC_DIR)/, $(addsuffix .h, $(DEPS)))
 TEMPLATES =

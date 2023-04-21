@@ -100,6 +100,7 @@ std::vector<int> ListGraph::getNeighbourIndices(int idx) {
 }
 
 void ListGraph::printNeighbourIndices(int idx) {
+    if (vertexList.at(idx).empty()) return;
     for (Edge e : vertexList.at(idx)) {
         std::cout<<e.getEndingVertex()<<" ";
     }
