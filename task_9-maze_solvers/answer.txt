@@ -1,0 +1,10 @@
+wyniki mogą się nieznacznie różnić w BFS o kilka w zależności od kolejności wektora sąsiadów
+BFS
+visited: 153
+ipath size: 31
+Greedy
+visited: 40
+path size: 31
+A Star
+visited: 74
+path size: 31

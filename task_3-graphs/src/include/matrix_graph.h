@@ -5,8 +5,6 @@
 #include <string>
 #include <vector>
 
-// graf nieskierowany 
-
 class MatrixGraph {
     int **matrix;
     int numberOfVertices;

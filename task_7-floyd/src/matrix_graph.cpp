@@ -129,6 +129,13 @@ void MatrixGraph::floydWarshall() {
         }
     }
 
+    for (int i = 0; i < numberOfVertices; i++) {
+        for (int j = 0; j < numberOfVertices; j++) {
+            std::cout << tab[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
     for (int k = 0; k < numberOfVertices; k++) {
         for (int i = 0; i < numberOfVertices; i++) {
             for (int j = 0; j < numberOfVertices; j++) {
@@ -139,10 +146,5 @@ void MatrixGraph::floydWarshall() {
         }
     }
 
-    for (int i = 0; i < numberOfVertices; i++) {
-        for (int j = 0; j < numberOfVertices; j++) {
-            std::cout << tab[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+
 }

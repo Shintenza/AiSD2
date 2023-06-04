@@ -172,5 +172,12 @@ std::vector<int> MatrixGraph::topologicalSort() {
             }
         }
     }
+
+    for (int i = 0; i < numberOfVertices; i++) {
+        std::cout<<neighboursCount[i]<<" ";
+    }
+
+    std::cout<<std::endl;
+
     return result;
 }

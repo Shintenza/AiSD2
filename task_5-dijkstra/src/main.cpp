@@ -23,6 +23,7 @@ void dijkstra(MatrixGraph &graph, int src, int dest) {
             prev[i] = -1;
         }
     }
+
     pq.push({0, src});
     while (!pq.empty()) {
         int min = pq.top().second;

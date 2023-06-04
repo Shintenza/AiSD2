@@ -3,11 +3,12 @@
 ListGraph::ListGraph(std::string dataPath) {
     std::ifstream infile(dataPath);
     int tmp1, tmp2;
-    infile>>tmp1;
-    if (tmp1 <= 0) throw "invalid number of vertices";
-    // vertexList.resize(tmp1);
+    infile >> tmp1;
+    if (tmp1 <= 0)
+        throw "invalid number of vertices";
+    vertexList.resize(tmp1);
 
-    while(infile >> tmp1 >> tmp2) {
+    while (infile >> tmp1 >> tmp2) {
         addEdge(tmp1, tmp2);
     }
 }
@@ -49,8 +50,8 @@ bool ListGraph::removeEdge(int starting_index, int ending_index) {
         idx++;
     }
 
-
-    if (!found) return found;
+    if (!found)
+        return found;
     std::vector<Edge> &vertex = vertexList.at(starting_index);
     vertex.erase(vertex.begin() + idx);
 
@@ -89,7 +90,6 @@ int ListGraph::vertexDegree(int idx) {
     return deg;
 }
 
-
 std::vector<int> ListGraph::getNeighbourIndices(int idx) {
     std::vector<int> results;
 
@@ -100,10 +100,12 @@ std::vector<int> ListGraph::getNeighbourIndices(int idx) {
 }
 
 void ListGraph::printNeighbourIndices(int idx) {
+    if (vertexList.at(idx).empty())
+        return;
     for (Edge e : vertexList.at(idx)) {
-        std::cout<<e.getEndingVertex()<<" ";
+        std::cout << e.getEndingVertex() << " ";
     }
-    std::cout<<std::endl;
+    std::cout << std::endl;
 }
 
 int ListGraph::getNumberOfEdges() {
@@ -114,41 +116,6 @@ int ListGraph::getNumberOfEdges() {
     return edges / 2;
 }
 
-void ListGraph::DFS(int v, std::vector<int> &out) {
-    out.push_back(v);
-    visited[v] = true;
-    
-    auto neighbours = getNeighbourIndices(v);
-    for (int v : neighbours) {
-        if(!visited[v]) {
-            DFS(v, out);
-        }
-    }
-}
-
-void ListGraph::BFS(int v, std::vector<int> &out) {
-    bool *visited = new bool[vertexList.size()]();
-    std::queue<int> queue;
-    visited[v] = true;
-    queue.push(v);
-    out.push_back(v);
-
-    while(!queue.empty()) {
-        v = queue.front();
-        queue.pop();
-        
-        auto neighbours = getNeighbourIndices(v);
-        for ( int vertex : neighbours) {
-            if (!visited[vertex]) {
-                out.push_back(vertex);
-                visited[vertex] = true;
-                queue.push(vertex);
-            }
-        }
-    }
-    
-}
-
 void ListGraph::printGraph() {
     for (std::size_t i = 0; i < vertexList.size(); i++) {
         std::cout << "Vertex nr. " << i << ": ";
@@ -157,4 +124,74 @@ void ListGraph::printGraph() {
         }
         std::cout << std::endl;
     }
+}
+
+std::array<int, 2> ListGraph::getInnerOuterEdges(int idx, std::vector<int> &partition) {
+    std::array<int, 2> res;
+    std::vector<int> neighbours = getNeighbourIndices(idx);
+    int inner = 0;
+    int crossing = 0;
+
+    bool vertPart = partition[idx];
+
+    for (int i = 0; i < neighbours.size(); i++) {
+        if (partition[neighbours.at(i)] == vertPart)
+            inner++;
+        else
+            crossing++;
+    }
+
+    res[0] = inner;
+    res[1] = crossing;
+
+    return res;
+}
+
+int ListGraph::maxCut() {
+    srand((unsigned)time(0));
+
+    int bestAnswer = 0;
+    std::vector<int> bestPartition;
+    std::vector<int> partition(vertexList.size());
+
+    for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < partition.size(); i++) {
+            partition[i] = rand() % 2;
+        }
+
+        bool condition = true;
+        while (condition) {
+            condition = false;
+            for (int i = 0; i < vertexList.size(); i++) {
+                std::array<int, 2> edgeCount = getInnerOuterEdges(i, partition);
+                if (edgeCount[0] > edgeCount[1]) {
+                    condition = true;
+                    if (partition[i] == 1)
+                        partition[i] = 0;
+                    else
+                        partition[i] = 1;
+                }
+            }
+        }
+
+        int crossingCounter = 0;
+
+        for (int i = 0; i < vertexList.size(); i++) {
+            crossingCounter += getInnerOuterEdges(i, partition)[1];
+        }
+        crossingCounter /= 2;
+
+        if (crossingCounter > bestAnswer) {
+            bestAnswer = crossingCounter;
+            bestPartition = partition;
+        }
+    }
+
+    for(int i : bestPartition) {
+        std::cout<<i<<" ";
+    }
+
+    std::cout<<std::endl;
+
+    return bestAnswer;
 }

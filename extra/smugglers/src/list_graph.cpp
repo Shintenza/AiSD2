@@ -33,7 +33,8 @@ int ListGraph::getEdgeWeight(int v1, int v2) {
 }
 std::vector<int> ListGraph::getNeighbourIndices(int idx) {
     std::vector<int> results;
-    if (vertexList.empty()) return results;
+    if (vertexList.empty())
+        return results;
 
     for (Edge e : vertexList.at(idx)) {
         results.push_back(e.getEndingVertex());
