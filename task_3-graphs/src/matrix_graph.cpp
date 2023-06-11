@@ -38,7 +38,6 @@ void MatrixGraph::addEdge(int first_vindex, int second_vindex, int weight) {
     if (first_vindex < 0 || first_vindex >= numberOfVertices || second_vindex < 0 || second_vindex >= numberOfVertices || weight < 1)
         throw std::invalid_argument("wrong arguments");
     matrix[first_vindex][second_vindex] = weight > 1 ? weight : 1;
-    matrix[second_vindex][first_vindex] = weight > 1 ? weight : 1;
 }
 
 bool MatrixGraph::removeEdge(int first_vindex, int second_vindex) {
@@ -47,7 +46,6 @@ bool MatrixGraph::removeEdge(int first_vindex, int second_vindex) {
 
     if (matrix[first_vindex][second_vindex] > 0) {
         matrix[first_vindex][second_vindex] = 0;
-        matrix[second_vindex][first_vindex] = 0;
         return true;
     }
     return false;
@@ -67,7 +65,7 @@ bool MatrixGraph::checkEdge(int first_vindex, int second_vindex) {
 int MatrixGraph::vertexDegree(int idx) {
     int deg = 0;
     for (int i = 0; i < numberOfVertices; i++) {
-        if (matrix[i][idx] > 0)
+        if (matrix[idx][i] > 0)
             deg++;
     }
     return deg;
@@ -76,7 +74,7 @@ int MatrixGraph::vertexDegree(int idx) {
 std::vector<int> MatrixGraph::getNeighbourIndices(int idx) {
     std::vector<int> vec;
     for (int i = 0; i < numberOfVertices; i++) {
-        if (matrix[i][idx] > 0)
+        if (matrix[idx][i] > 0)
             vec.push_back(i);
     }
     return vec;
@@ -84,7 +82,7 @@ std::vector<int> MatrixGraph::getNeighbourIndices(int idx) {
 
 void MatrixGraph::printNeighbourIndices(int idx) {
     for (int i = 0; i < numberOfVertices; i++) {
-        if (matrix[i][idx])
+        if (matrix[idx][i])
             std::cout << i << " ";
     }
     std::cout << std::endl;
@@ -98,7 +96,7 @@ int MatrixGraph::getNumberOfEdges() {
                 edgesCounter++;
         }
     }
-    return edgesCounter / 2;
+    return edgesCounter;
 }
 
 void MatrixGraph::printMatrix() {

@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -std=c++11 -g
+CFLAGS = -std=c++11 -g
 
 NAME = task_3
 OBJ_DIR = obj

@@ -15,7 +15,7 @@ public:
     ListGraph() {};
     ListGraph(std::string dataPath);
     ListGraph(int initial_size) : vertexList(initial_size){};
-    void addEdge(int i_Vertex_Index_1, int i_Vertex_Index_2);
+    void addEdge(int i_Vertex_Index_1, int i_Vertex_Index_2, int weight = 1);
     bool removeEdge(int i_Vertex_Index_1, int i_Vertex_Index_2);
     bool checkEdge(int i_Vertex_Index_1, int i_Vertex_Index_2);
     int vertexDegree(int idx);
